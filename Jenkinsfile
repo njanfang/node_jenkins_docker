@@ -3,15 +3,10 @@ pipeline {
     stages {
         stage('Tests') {
             steps {
-//                 script {
-//                    docker.image('node:10-stretch').inside { c ->
                         echo 'Building..'
                         sh 'npm install'
                         echo 'Testing..'
                         sh 'npm test'
-//                         sh "docker logs ${c.id}"
-//                    }
-//                 }
             }
         }
         stage('Build and push docker image') {
@@ -30,7 +25,6 @@ pipeline {
             }
             steps {
                 script {
-//                     sh 'docker login -u $DOCKER_HOST_CREDENTIALS_USR -p $DOCKER_HOST_CREDENTIALS_PSW 127.0.0.1:2375'
                     sh 'docker pull njanfang/node_jenkins_docker:master'
                     sh 'docker stop node_jenkins_docker'
                     sh 'docker rm node_jenkins_docker'
